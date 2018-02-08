@@ -25,7 +25,6 @@
                                 </div>
                             @endif
 
-
                             <div class="form-group {!! fieldHasError('name', $errors) !!}">
                                 {!! Form::label('name', 'Description', ['class' => 'control-label']) !!}
                                 {!! Form::text('name', null, ['class' => 'form-control']) !!}
@@ -38,8 +37,9 @@
                                 {!! fieldErrorMessage('amount', $errors) !!}
                             </div>
 
-                            <a href="{!! URL::previous() !!}" class="btn btn-default"> Back</a>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <a href="{!! URL::previous() !!}" class="btn btn-default"> Cancel</a>
+                            <button type="submit" class="btn btn-primary" name="deposit">Deposit</button>
+                            <button type="submit" class="btn btn-danger" name="expense">Expense</button>
                         </form>
                     </div>
                 </div>

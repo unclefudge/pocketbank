@@ -54,13 +54,18 @@ class TransactionController extends Controller {
             'amount' => 'required|regex:/^\d*(\.\d{1,2})?$/',
         ]);
 
-        $fields = request()->all();
+        $fields = request()->only('user_id', 'name', 'amount');
+
         if (preg_match('/\.[0-9]$/', request('amount')))
             $fields['amount'] = preg_replace('/\./', '', request('amount')) . '0';
         elseif (preg_match('/\.[0-9][0-9]$/', request('amount')))
             $fields['amount'] = preg_replace('/\./', '', request('amount'));
         else
             $fields['amount'] = request('amount') . '00';
+
+        if (request()->has('expense'))
+            $fields['amount'] = 0 - $fields['amount'];
+        //dd($fields);
 
         $fields['created_by'] = Auth::user()->id;
         //dd($fields);
